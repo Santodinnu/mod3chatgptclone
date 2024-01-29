@@ -14,25 +14,23 @@ import {
   Card,
 } from "@mui/material";
 
-const JsConverter = () => {
+const ChatBot = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
   // states
   const [text, settext] = useState("");
-  const [code, setCode] = useState("");
+  const [response, setResponse] = useState("");
   const [error, setError] = useState("");
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/openai/js-converter", {
-        text,
-      });
+      const { data } = await axios.post("/api/v1/openai/chatbot", { text });
       console.log(data);
-      setCode(data);
+      setResponse(data);
     } catch (err) {
       console.log(error);
       if (err.response.data.error) {
@@ -60,7 +58,7 @@ const JsConverter = () => {
         </Alert>
       </Collapse>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h3">JS Converter</Typography>
+        <Typography variant="h3">Ask with Chatbot</Typography>
 
         <TextField
           placeholder="add your text"
@@ -82,14 +80,14 @@ const JsConverter = () => {
           size="large"
           sx={{ color: "white", mt: 2 }}
         >
-          Convert
+          Chat
         </Button>
         <Typography mt={2}>
           not this tool ? <Link to="/">GO BACK</Link>
         </Typography>
       </form>
 
-      {code ? (
+      {response ? (
         <Card
           sx={{
             mt: 4,
@@ -99,12 +97,9 @@ const JsConverter = () => {
             borderRadius: 5,
             borderColor: "natural.medium",
             bgcolor: "background.default",
-            overflow: "auto",
           }}
         >
-          <pre>
-            <Typography p={2}>{code}</Typography>
-          </pre>
+          <Typography p={2}>{response}</Typography>
         </Card>
       ) : (
         <Card
@@ -127,7 +122,7 @@ const JsConverter = () => {
               lineHeight: "450px",
             }}
           >
-            Your Code Will Apprea Here
+            Bot Response
           </Typography>
         </Card>
       )}
@@ -135,4 +130,4 @@ const JsConverter = () => {
   );
 };
 
-export default JsConverter;
+export default ChatBot;
