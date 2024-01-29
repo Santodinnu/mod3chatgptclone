@@ -9,6 +9,9 @@ import { themeSettings } from "./theme.js";
 
 import Navbar from "./components/Navbar.jsx";
 import Homepage from "./pages/Homepage.jsx";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Summary from "./pages/Summary";
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings(), []));
@@ -21,6 +24,9 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/summary" element={<Summary />} />
         </Routes>
       </ThemeProvider>
     </>

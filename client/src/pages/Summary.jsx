@@ -52,7 +52,7 @@ const Summary = () => {
       sx={{ boxShadow: 5 }}
       backgroundColor={theme.palette.background.alt}
     >
-      <Collapse in={error}>
+      <Collapse in={!!error}>
         <Alert severity="error" sx={{ mb: 2 }}>
           {error}
         </Alert>
@@ -83,7 +83,7 @@ const Summary = () => {
           Submit
         </Button>
         <Typography mt={2}>
-          not this tool ? <Link to="/">GO BACK</Link>
+          Not this tool ? <Link to="/">GO BACK</Link>
         </Typography>
       </form>
 
@@ -118,11 +118,11 @@ const Summary = () => {
             color="natural.main"
             sx={{
               textAlign: "center",
-              verticalAlign: "middel",
+              verticalAlign: "middle",
               lineHeight: "450px",
             }}
           >
-            Summary Will Apprea Here
+            Summary Will Appear Here
           </Typography>
         </Card>
       )}
