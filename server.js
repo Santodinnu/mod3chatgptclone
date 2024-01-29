@@ -17,6 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 // app.use(errorHandler);
 
-app.listen(8080, () => {
-    console.log("Server running on port 8080");
+
+const PORT = process.env.PORT || 8080
+
+app.listen(PORT, () => {
+    console.log(
+        `Server Running in ${process.env.DEV_MODE} mode on port no ${PORT}`);
 });
