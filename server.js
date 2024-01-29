@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
-app.use(errorHandler);
+// app.use(errorHandler);
 
 app.listen(8080, () => {
     console.log("Server running on port 8080");
