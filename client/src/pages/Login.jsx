@@ -27,12 +27,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/v1/auth/login", { email, password });
+      const response = await axios.post("/api/v1/auth/login", { email, password });
+      // Assuming the token is received from the server response
+      const authToken = response.data.token; // Adjust this based on your actual server response structure
+      console.log("Received Token:", authToken); // Log the received token
+      localStorage.setItem("authToken", authToken);
       toast.success("Login Successfully");
-      localStorage.setItem("authToken", true);
       navigate("/");
     } catch (err) {
-      console.log(error);
+      console.log(err); // Fixing the variable name
       if (err.response.data.error) {
         setError(err.response.data.error);
       } else if (err.message) {
@@ -43,6 +46,7 @@ const Login = () => {
       }, 5000);
     }
   };
+  
   return (
     <Box
       width={isNotMobile ? "40%" : "80%"}

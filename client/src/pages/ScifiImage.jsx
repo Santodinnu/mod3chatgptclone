@@ -32,7 +32,7 @@ const ScifiImage = () => {
       console.log(data);
       setImage(data);
     } catch (err) {
-      console.log(error);
+      console.log(err);
       if (err.response.data.error) {
         setError(err.response.data.error);
       } else if (err.message) {
@@ -100,7 +100,7 @@ const ScifiImage = () => {
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "center", my: 5 }}>
-            <img src={image} alt="scifiimage" />
+            <img src={image} alt="Generated Sci-Fi Image" />
           </Box>
         </Card>
       ) : (
@@ -120,11 +120,11 @@ const ScifiImage = () => {
             color="natural.main"
             sx={{
               textAlign: "center",
-              verticalAlign: "middel",
+              verticalAlign: "middle",
               lineHeight: "450px",
             }}
           >
-            Your Scifi Image Will Apprea Here
+            Your Scifi Image Will Appear Here
           </Typography>
         </Card>
       )}

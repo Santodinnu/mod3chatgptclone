@@ -9,6 +9,7 @@ const connectDB = async () => {
     );
   } catch (error) {
     console.log(`Mognodb Database Error ${error}`.bgRed.white);
+    process.exit(1)
   }
 };
 

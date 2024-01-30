@@ -27,7 +27,7 @@ app.use(morgan("dev"));
 app.use(errorHandler);
 
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 5173
 
 //API routes
 app.use("/api/v1/auth", authRoutes);

@@ -32,7 +32,7 @@ const Summary = () => {
       console.log(data);
       setSummary(data);
     } catch (err) {
-      console.log(error);
+      console.log(err);
       if (err.response.data.error) {
         setError(err.response.data.error);
       } else if (err.message) {

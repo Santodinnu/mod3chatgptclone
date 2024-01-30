@@ -34,7 +34,7 @@ const JsConverter = () => {
       console.log(data);
       setCode(data);
     } catch (err) {
-      console.log(error);
+      console.log(err);
       if (err.response.data.error) {
         setError(err.response.data.error);
       } else if (err.message) {
@@ -123,7 +123,7 @@ const JsConverter = () => {
             color="natural.main"
             sx={{
               textAlign: "center",
-              verticalAlign: "middel",
+              verticalAlign: "middle",
               lineHeight: "450px",
             }}
           >

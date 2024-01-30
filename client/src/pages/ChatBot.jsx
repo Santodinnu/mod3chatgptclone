@@ -32,7 +32,7 @@ const ChatBot = () => {
       console.log(data);
       setResponse(data);
     } catch (err) {
-      console.log(error);
+      console.log(err);
       if (err.response.data.error) {
         setError(err.response.data.error);
       } else if (err.message) {
@@ -118,7 +118,7 @@ const ChatBot = () => {
             color="natural.main"
             sx={{
               textAlign: "center",
-              verticalAlign: "middel",
+              verticalAlign: "middle",
               lineHeight: "450px",
             }}
           >

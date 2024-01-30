@@ -32,7 +32,7 @@ const Paragraph = () => {
       console.log(data);
       setPara(data);
     } catch (err) {
-      console.log(error);
+      console.log(err);
       if (err.response.data.error) {
         setError(err.response.data.error);
       } else if (err.message) {
@@ -122,7 +122,7 @@ const Paragraph = () => {
               lineHeight: "450px",
             }}
           >
-            Your Paragraph Will Apprea Here
+            Your Paragraph Will Appear Here
           </Typography>
         </Card>
       )}
