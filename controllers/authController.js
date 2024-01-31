@@ -1,4 +1,4 @@
-const userModel = require("../models/userModel");
+const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -50,10 +50,11 @@ async function registerController(req, res) {
 
 async function loginController(req, res, next) {
   console.log('LOGIN /auth/login')
+  console.log(req.body)
     try {
         // 1. Check if user exists
 
-        const foundUser = await User.findOne({ username: req.body.username })
+        const foundUser = await User.findOne({ email: req.body.email })
 
         if (!foundUser) {
             return res.status(400).json({ error: 'No such user exists' }) 

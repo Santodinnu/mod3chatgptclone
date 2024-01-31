@@ -21,6 +21,8 @@ function authorize(req, res, next) {
 
         const payload = jwt.verify(token, process.env.JWT_SECRET)
 
+        console.log(payload)
+        
         if (payload.error) {
             return res.status(400).json({ error: payload.error })
         }

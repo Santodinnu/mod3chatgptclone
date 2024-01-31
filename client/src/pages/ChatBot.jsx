@@ -29,8 +29,8 @@ const ChatBot = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post("http://localhost:5000/api/openai/chatbot", { text });
-      console.log(data);
-      setResponse(data);
+      console.log(data.chat);
+      setResponse(data.chat);
     } catch (err) {
       console.log(err);
       if (err.response.data.error) {
