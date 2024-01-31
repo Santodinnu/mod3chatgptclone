@@ -23,6 +23,7 @@ function authorize(req, res, next) {
 
         console.log(payload)
         
+
         if (payload.error) {
             return res.status(400).json({ error: payload.error })
         }
