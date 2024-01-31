@@ -13,7 +13,7 @@ const Navbar = () => {
     sx={{ boxShadow: 3, mb: 2}}
   >
     <Typography variant='h1' color={'primary'} fontWeight={'bold'}>
-      AI GPT Clone
+    SynthInscribe Pro
     </Typography>
     <Link href ='/register' p={1}>Sign Up</Link>
     <Link href ='/login' p={1}>Sign In</Link> 
