@@ -31,8 +31,8 @@ const JsConverter = () => {
       const { data } = await axios.post("http://localhost:5000/api/openai/js-converter", {
         text,
       });
-      console.log(data);
-      setCode(data);
+      console.log(data.js);
+      setCode(data.js);
     } catch (err) {
       console.log(err);
       if (err.response.data.error) {
@@ -102,9 +102,7 @@ const JsConverter = () => {
             overflow: "auto",
           }}
         >
-          <pre>
-            <Typography p={2}>{code}</Typography>
-          </pre>
+          <Typography p={2}>{code}</Typography>
         </Card>
       ) : (
         <Card
