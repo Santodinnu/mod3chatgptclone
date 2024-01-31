@@ -22,24 +22,24 @@ const ScifiImage = () => {
   // states
   const [text, settext] = useState("");
   const [image, setImage] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/openai/scifi-image", { text });
+      const { data } = await axios.post("http://localhost:5000/api/openai/scifi-image", { text });
       console.log(data);
       setImage(data);
     } catch (err) {
       console.log(err);
       if (err.response.data.error) {
-        setError(err.response.data.error);
+        setError(false);
       } else if (err.message) {
-        setError(err.message);
+        setError(false);
       }
       setTimeout(() => {
-        setError("");
+        setError(false);
       }, 5000);
     }
   };

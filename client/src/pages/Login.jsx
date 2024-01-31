@@ -21,13 +21,13 @@ const Login = () => {
   // states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/v1/auth/login", { email, password });
+      const response = await axios.post("http://localhost:5000/api/auth/login", { email, password });
       // Assuming the token is received from the server response
       const authToken = response.data.token; // Adjust this based on your actual server response structure
       console.log("Received Token:", authToken); // Log the received token
@@ -42,7 +42,7 @@ const Login = () => {
         setError(err.message);
       }
       setTimeout(() => {
-        setError("");
+        setError(false);
       }, 5000);
     }
   };

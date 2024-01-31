@@ -22,13 +22,13 @@ const JsConverter = () => {
   // states
   const [text, settext] = useState("");
   const [code, setCode] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/openai/js-converter", {
+      const { data } = await axios.post("http://localhost:5000/api/openai/js-converter", {
         text,
       });
       console.log(data);
@@ -41,7 +41,7 @@ const JsConverter = () => {
         setError(err.message);
       }
       setTimeout(() => {
-        setError("");
+        setError(false);
       }, 5000);
     }
   };

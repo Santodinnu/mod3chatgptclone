@@ -22,15 +22,15 @@ const Summary = () => {
   // states
   const [text, settext] = useState("");
   const [summary, setSummary] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/openai/summary", { text });
+      const { data } = await axios.post("http://localhost:5000/api/openai/summary", { text });
       console.log(data);
-      setSummary(data);
+      setSummary(data.summary);
     } catch (err) {
       console.log(err);
       if (err.response.data.error) {
@@ -39,7 +39,7 @@ const Summary = () => {
         setError(err.message);
       }
       setTimeout(() => {
-        setError("");
+        setError(false);
       }, 5000);
     }
   };

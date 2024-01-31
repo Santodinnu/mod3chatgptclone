@@ -22,13 +22,13 @@ const Paragraph = () => {
   // states
   const [text, settext] = useState("");
   const [para, setPara] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/openai/paragraph", { text });
+      const { data } = await axios.post("http://localhost:5000/api/openai/paragraph", { text });
       console.log(data);
       setPara(data);
     } catch (err) {
@@ -39,7 +39,7 @@ const Paragraph = () => {
         setError(err.message);
       }
       setTimeout(() => {
-        setError("");
+        setError(false);
       }, 5000);
     }
   };

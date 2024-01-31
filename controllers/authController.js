@@ -1,62 +1,87 @@
-const errorHandler = require("../middelwares/errorMiddleware");
 const userModel = require("../models/userModel");
-const errorResponse = require("../utils/errorResponse");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-// JWT TOKEN
-exports.sendToken = (user, statusCode, res) => {
-  const token = user.getSignedToken(res);
-  res.status(statusCode).json({
-    success: true,
-    token,
-  });
-};
 
-//REGISTER
-exports.registerContoller = async (req, res, next) => {
-  try {
-    const { username, email, password } = req.body;
-    //exisitng user
-    const exisitingEmail = await userModel.findOne({ email });
-    if (exisitingEmail) {
-      return next(new errorResponse("Email is already register", 500));
-    }
-    const user = await userModel.create({ username, email, password });
-    this.sendToken(user, 201, res);
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
+function generateToken(user) {
+  const payload = { id: user._id, username: user.username };
+  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 300 });
+}
 
-//LOGIN
-exports.loginController = async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    //validation
-    if (!email || !password) {
-      return next(new errorResponse("Please provide email or password"));
-    }
-    const user = await userModel.findOne({ email });
-    if (!user) {
-      return next(new errorResponse("Invalid Creditial", 401));
-    }
-    const isMatch = await user.matchPassword(password);
-    if (!isMatch) {
-      return next(new errorResponse("Invalid Creditial", 401));
-    }
-    //res
-    this.sendToken(user, 200, res);
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
+async function registerController(req, res) {
+  console.log('REGISTER /auth/register')
+    try {
+        // 1. Check if the user exists 
 
-//LOGOUT
-exports.logoutController = async (req, res) => {
-  res.clearCookie("refreshToken");
-  return res.status(200).json({
-    success: true,
-    message: "Logout Succesfully",
-  });
+        const foundUser = await User.findOne({ username: req.body.username })
+
+        if (foundUser) {
+            return res.status(400).json({ error: 'User already exists' })
+        }
+
+        // 2. If they don't (new user... good!) encrypt the password
+
+        const encryptedPassword = await bcrypt.hash(req.body.password, 10)
+
+        console.log(encryptedPassword)
+
+        // 3. Add new user to the database (with the encrypted password)
+
+        console.log({ ...req.body, password: encryptedPassword })
+
+        const newUser = await User.create({ ...req.body, password: encryptedPassword })
+
+        console.log(newUser)
+
+        // 4. Generate a JWT token (the keys... permission slip... wrist band) and returning it to the user 
+            
+        const token = generateToken(newUser)
+
+        console.log(token)
+
+        res.status(200).json({ token })
+
+    } catch(err) {
+        console.log(err.message)
+        res.status(400).json({ error: err.message })
+    }
+
+}
+
+async function loginController(req, res, next) {
+  console.log('LOGIN /auth/login')
+    try {
+        // 1. Check if user exists
+
+        const foundUser = await User.findOne({ username: req.body.username })
+
+        if (!foundUser) {
+            return res.status(400).json({ error: 'No such user exists' }) 
+        }
+
+        // 2. Check if the password provided by user matches the one in the database
+
+        const validPass = await bcrypt.compare(req.body.password, foundUser.password)
+
+        if (!validPass) {
+            return res.status(400).json({ error: 'Invalid credentials' })
+        }
+
+        // 3. Generate a JWT token and return it to the user
+
+        const token = generateToken(foundUser)
+        
+        res.status(200).json({ token })
+
+    } catch(err) {
+        console.log(err.message)
+        res.status(400).json({ error: err.message })
+    }
+}
+
+
+module.exports = {
+  registerController,
+  loginController,
+  
 };

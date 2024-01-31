@@ -22,13 +22,14 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/v1/auth/register", { username, email, password });
+      console.log('reigst')
+      await axios.post("http://localhost:5000/api/auth/register", { username, email, password });
       toast.success("User Register Successfully");
       navigate("/login");
     } catch (err) {
@@ -39,7 +40,7 @@ const Register = () => {
         setError(err.message);
       }
       setTimeout(() => {
-        setError("");
+        setError(false);
       }, 5000);
     }
   };

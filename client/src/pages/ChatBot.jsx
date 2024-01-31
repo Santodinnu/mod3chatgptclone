@@ -22,13 +22,13 @@ const ChatBot = () => {
   // states
   const [text, settext] = useState("");
   const [response, setResponse] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/openai/chatbot", { text });
+      const { data } = await axios.post("http://localhost:5000/api/openai/chatbot", { text });
       console.log(data);
       setResponse(data);
     } catch (err) {
@@ -39,7 +39,7 @@ const ChatBot = () => {
         setError(err.message);
       }
       setTimeout(() => {
-        setError("");
+        setError(false);
       }, 5000);
     }
   };
