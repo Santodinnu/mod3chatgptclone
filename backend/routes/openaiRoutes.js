@@ -17,6 +17,6 @@ router.post("/chatbot", chatbotController);
 router.post("/js-converter", jsconverterController);
 router.post("/scifi-image", scifiImageController);
 
-// http://localhost:5000/api/openai/scifi-image
+// https://mod3projectbackend.onrender.com/api/openai/scifi-image
 
 module.exports = router;

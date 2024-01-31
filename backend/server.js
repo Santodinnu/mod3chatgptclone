@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000;
 app.use('/api/auth', authRoutes);
 app.use('/api/openai', openaiRoutes);
 
-// http://localhost:5000/api/openai/scifi-image
+// https://mod3projectbackend.onrender.com/api/openai/scifi-image
 
 app.listen(PORT, () => {
   console.log(`Server Running in ${process.env.DEV_MODE} mode on port no ${PORT}`.bgCyan.white);

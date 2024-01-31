@@ -27,7 +27,7 @@ const Paragraph = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/openai/paragraph", { text });
+      const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/paragraph", { text });
       console.log(data);
       setPara(data.paragraph);
     } catch (err) {

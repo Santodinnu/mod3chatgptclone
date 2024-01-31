@@ -27,7 +27,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+      const response = await axios.post("https://mod3projectbackend.onrender.com/api/auth/login", { email, password });
       // Assuming the token is received from the server response
       const authToken = response.data.token; // Adjust this based on your actual server response structure
       console.log("Received Token:", authToken); // Log the received token

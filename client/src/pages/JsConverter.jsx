@@ -28,7 +28,7 @@ const JsConverter = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/openai/js-converter", {
+      const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/js-converter", {
         text,
       });
       console.log(data.js);

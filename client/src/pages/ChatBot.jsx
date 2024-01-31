@@ -28,7 +28,7 @@ const ChatBot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/openai/chatbot", { text });
+      const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/chatbot", { text });
       console.log(data.chat);
       setResponse(data.chat);
     } catch (err) {
