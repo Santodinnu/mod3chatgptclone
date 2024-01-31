@@ -45,7 +45,8 @@ const ScifiImage = () => {
   };
   return (
     <Box
-      width={isNotMobile ? "40%" : "80%"}
+      // width={isNotMobile ? "40%" : "80%"}
+      width="60%"
       p={"2rem"}
       m={"2rem auto"}
       borderRadius={5}
@@ -83,7 +84,7 @@ const ScifiImage = () => {
           Submit
         </Button>
         <Typography mt={2}>
-          not this tool ? <Link to="/">GO BACK</Link>
+          Not this tool ? <Link to="/">GO BACK</Link>
         </Typography>
       </form>
 

@@ -45,7 +45,7 @@ const Summary = () => {
   };
   return (
     <Box
-      width={isNotMobile ? "40%" : "80%"}
+      width="60%"
       p={"2rem"}
       m={"2rem auto"}
       borderRadius={5}
