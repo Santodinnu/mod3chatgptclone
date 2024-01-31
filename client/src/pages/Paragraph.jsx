@@ -23,14 +23,13 @@ const Paragraph = () => {
   const [text, settext] = useState("");
   const [para, setPara] = useState("");
   const [error, setError] = useState(false);
-
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post("http://localhost:5000/api/openai/paragraph", { text });
       console.log(data);
-      setPara(data);
+      setPara(data.paragraph);
     } catch (err) {
       console.log(err);
       if (err.response.data.error) {
