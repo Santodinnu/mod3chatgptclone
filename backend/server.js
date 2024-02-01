@@ -24,6 +24,10 @@ app.use(express.json()); // Express's built-in JSON parsing
 
 const PORT = process.env.PORT || 5000;
 
+app.get('/',(req,res)=>{
+  res.send('Hello World')
+})
+
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/openai', openaiRoutes);
