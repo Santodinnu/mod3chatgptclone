@@ -29,7 +29,7 @@ const Register = () => {
     e.preventDefault();
     try {
       console.log('reigst')
-      await axios.post("https://mod3projectbackend.onrender.com/api/register", { username, email, password });
+      await axios.post("https://mod3projectbackend.onrender.com/api/auth/register", { username, email, password });
       toast.success("User Register Successfully");
       navigate("/login");
     } catch (err) {
