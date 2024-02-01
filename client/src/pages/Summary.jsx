@@ -13,6 +13,7 @@ import {
   Collapse,
   Card,
 } from "@mui/material";
+import baseURL from "../../Api";
 
 const Summary = () => {
   const theme = useTheme();
@@ -27,11 +28,17 @@ const Summary = () => {
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // try {
+    //   const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/summary", { text });
+    //   console.log(data);
+    //   setSummary(data.summary);
+    // } 
     try {
-      const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/summary", { text });
+      const { data } = await axios.post(baseURL+"/api/openai/summary", { text });
       console.log(data);
       setSummary(data.summary);
-    } catch (err) {
+    }
+    catch (err) {
       console.log(err);
       if (err.response.data.error) {
         setError(err.response.data.error);

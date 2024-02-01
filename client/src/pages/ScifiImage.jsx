@@ -13,6 +13,7 @@ import {
   Collapse,
   Card,
 } from "@mui/material";
+import baseURL from "../../Api";
 
 const ScifiImage = () => {
   const theme = useTheme();
@@ -27,11 +28,17 @@ const ScifiImage = () => {
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // try {
+    //   const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/scifi-image", { text });
+    //   console.log(data);
+    //   setImage(data);
+    // } 
     try {
-      const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/scifi-image", { text });
+      const { data } = await axios.post(baseURL+"/api/openai/scifi-image", { text });
       console.log(data);
       setImage(data);
-    } catch (err) {
+    }
+    catch (err) {
       console.log(err);
       if (err.response.data.error) {
         setError(false);

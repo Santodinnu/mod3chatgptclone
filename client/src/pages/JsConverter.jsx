@@ -13,6 +13,7 @@ import {
   Collapse,
   Card,
 } from "@mui/material";
+import baseURL from "../../Api";
 
 const JsConverter = () => {
   const theme = useTheme();
@@ -27,10 +28,14 @@ const JsConverter = () => {
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/js-converter", {
-        text,
-      });
+    // try {
+    //   const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/js-converter", {
+    //     text,
+    //   });
+      try {
+        const { data } = await axios.post(baseURL+"/api/openai/js-converter", {
+          text,
+        });
       console.log(data.js);
       setCode(data.js);
     } catch (err) {

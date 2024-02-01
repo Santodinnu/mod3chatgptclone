@@ -12,6 +12,7 @@ import {
   Alert,
   Collapse,
 } from "@mui/material";
+import baseURL from "../../Api";
 
 const Register = () => {
   const theme = useTheme();
@@ -27,12 +28,19 @@ const Register = () => {
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // try {
+    //   console.log('reigst')
+    //   await axios.post("https://mod3projectbackend.onrender.com/api/auth/register", { username, email, password });
+    //   toast.success("User Register Successfully");
+    //   navigate("/login");
+    // } 
     try {
       console.log('reigst')
-      await axios.post("https://mod3projectbackend.onrender.com/api/auth/register", { username, email, password });
+      await axios.post(baseURL+"/api/auth/register", { username, email, password });
       toast.success("User Register Successfully");
       navigate("/login");
-    } catch (err) {
+    } 
+    catch (err) {
       console.log(err);
       if (err.response.data.error) {
         setError(err.response.data.error);

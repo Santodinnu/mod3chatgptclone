@@ -12,6 +12,7 @@ import {
   Alert,
   Collapse,
 } from "@mui/material";
+import baseURL from "../../Api";
 
 const Login = () => {
   const theme = useTheme();
@@ -26,15 +27,26 @@ const Login = () => {
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // try {
+    //   const response = await axios.post("https://mod3projectbackend.onrender.com/api/auth/login", { email, password });
+    //   // Assuming the token is received from the server response
+    //   const authToken = response.data.token; // Adjust this based on your actual server response structure
+    //   console.log("Received Token:", authToken); // Log the received token
+    //   localStorage.setItem("authToken", authToken);
+    //   toast.success("Login Successfully");
+    //   navigate("/");
+    // } 
+    
     try {
-      const response = await axios.post("https://mod3projectbackend.onrender.com/api/auth/login", { email, password });
+      const response = await axios.post(baseURL+"/api/auth/login", { email, password });
       // Assuming the token is received from the server response
       const authToken = response.data.token; // Adjust this based on your actual server response structure
       console.log("Received Token:", authToken); // Log the received token
       localStorage.setItem("authToken", authToken);
       toast.success("Login Successfully");
       navigate("/");
-    } catch (err) {
+    } 
+    catch (err) {
       console.log(err); // Fixing the variable name
       if (err.response.data.error) {
         setError(err.response.data.error);

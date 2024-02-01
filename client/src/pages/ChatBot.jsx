@@ -13,6 +13,8 @@ import {
   Collapse,
   Card,
 } from "@mui/material";
+import baseURL from "../../Api";
+
 
 const ChatBot = () => {
   const theme = useTheme();
@@ -28,7 +30,8 @@ const ChatBot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/chatbot", { text });
+      // const { data } = await axios.post("https://mod3projectbackend.onrender.com/api/openai/chatbot", { text });
+      const { data } = await axios.post(baseURL+"/api/openai/chatbot", { text });
       console.log(data.chat);
       setResponse(data.chat);
     } catch (err) {
